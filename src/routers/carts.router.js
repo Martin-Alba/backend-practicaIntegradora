@@ -1,10 +1,18 @@
 import { Router } from "express";
 import CartManager from "../dao/CartManager.js";
 import ProductManager from "../dao/ProductManager.js";
+import cartsModel from "../dao/models/carts.model.js";
 
 const router = Router();
 
 const cartManager = new CartManager();
+
+router.get('/', async (req, res) => {
+  const carts = await cartsModel.find().lean().exec()
+  res.render('carts', {
+    carts
+  })
+})
 
 router.post("/", (req, res) => {
   const newCart = cartManager.createCart();
