@@ -1,28 +1,28 @@
-import { Router } from 'express'
-import ProductManager from '../dao/ProductManager.js'
-import { createServer } from 'http'
-import { Server } from 'socket.io'
+import { Router } from "express";
+import ProductManager from "../dao/ProductManager.js";
+import { createServer } from "http";
+import { Server } from "socket.io";
 
-const router = Router()
+const router = Router();
 
-const manager = new ProductManager('./dataBase.json')
+const manager = new ProductManager("./dataBase.json");
 
-router.get('/', (req, res) => {
-    try {
-        const products = manager.getProducts()
-        res.render('index', { products: products })
-    } catch (err) {
-        res.status(500).send('Ocurrió un error al leer el archivo de productos')
-    }
-})
-
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   try {
-    const products = manager.getProducts()
-    res.render('realTimeProducts', { products })
+    const products = manager.getProducts();
+    res.render("index", { products: products });
   } catch (err) {
-    res.status(500).send('Ocurrió un error al leer el archivo de productos');
+    res.status(500).send("Ocurrió un error al leer el archivo de productos");
   }
-})
+});
 
-export default router
+router.get("/", (req, res) => {
+  try {
+    const products = manager.getProducts();
+    res.render("realTimeProducts", { products });
+  } catch (err) {
+    res.status(500).send("Ocurrió un error al leer el archivo de productos");
+  }
+});
+
+export default router;

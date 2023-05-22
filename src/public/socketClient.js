@@ -5,13 +5,11 @@ const socketClient = io();
 const addform = document.querySelector("#addproduct");
 
 addform.addEventListener("submit", (ev) => {
-
   ev.preventDefault();
 
   // emito un evento para agragar el producto
 
   socketClient.emit("addProd", ev.currentTarget.prodjson.value);
-
 });
 
 // busco busco todos los botones para borrar el producto
@@ -19,32 +17,24 @@ addform.addEventListener("submit", (ev) => {
 const deletebutton = document.querySelectorAll(".deleteproduct");
 
 deletebutton.forEach((button) => {
-
   button.addEventListener("click", (ev) => {
-
     ev.preventDefault();
 
     socketClient.emit(
-
       "deleteProd",
 
-      ev.currentTarget.getAttribute("prodid"),
-
+      ev.currentTarget.getAttribute("prodid")
     );
-
   });
-
 });
 
 socketClient.on("products", (productos) => {
-
   let innerHtml = "";
 
   // creo el html para reemplazar los productos en realTimeProducts
 
   productos.forEach((producto) => {
-
-```    innerHtml += ````
+    ```    innerHtml += ````
 
     <div id="product${[producto.id](producto.id)}"></div>
 
@@ -87,7 +77,6 @@ socketClient.on("products", (productos) => {
       </div>
 
       `;
-
   });
 
   document.querySelector("#realtimeproducts").innerHTML = innerHtml;
@@ -97,41 +86,28 @@ socketClient.on("products", (productos) => {
   const deletebutton = document.querySelectorAll(".deleteproduct");
 
   deletebutton.forEach((button) => {
-
     button.addEventListener("click", (ev) => {
-
       ev.preventDefault();
 
       socketClient.emit(
-
         "deleteProd",
 
-        ev.currentTarget.getAttribute("prodid"),
-
+        ev.currentTarget.getAttribute("prodid")
       );
-
     });
-
   });
-
 });
 
 socketClient.on("error", (errores) => {
-
   let errorestxt = "ERROR\r";
 
   errores.errortxt.forEach((error) => {
-
     errorestxt += error + "\r";
-
   });
 
   alert(errorestxt);
-
 });
 
 socketClient.on("result", (reaultado) => {
-
   alert(reaultado);
-
 });
