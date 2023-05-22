@@ -7,6 +7,7 @@ import ProductManager from "../src/dao/ProductManager.js";
 import productsRouter from "../src/routers/products.router.js";
 import cartManager from "../src/routers/carts.router.js";
 import realTime from "./routers/realTimeProducts.js";
+import msgRouter from "./routers/messages.router.js"
 
 const manager = new ProductManager("./dataBase.json");
 
@@ -185,6 +186,7 @@ app.use("/realtimeproducts", realTime);
 const uri = "mongodb+srv://Mrt:064@test.c7vgcry.mongodb.net/ecommerce";
 
 app.use("/products", productsRouter);
+app.use("/chat", msgRouter)
 
 mongoose.set("strictQuery", false);
 try {

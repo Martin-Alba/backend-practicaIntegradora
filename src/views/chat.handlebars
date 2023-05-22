@@ -1,0 +1,14 @@
+<div>
+    <h1>Chat!</h1>
+    {{#each messages}}
+    <p>{{this.user}}: {{this.message}}</p>
+    <p>{{this.timestamp}}</p>
+    <hr>
+    {{/each}}
+
+    <form action="/chat" method="post">
+    Nombre: <input type="text" name="user" required><br>
+    Mensaje: <input type="text" name="message" required><br>
+    <input type="submit" value="Enviar">
+    </form>
+</div>
